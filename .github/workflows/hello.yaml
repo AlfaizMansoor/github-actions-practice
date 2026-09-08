@@ -32,4 +32,7 @@ jobs:
     steps:
       - name: printing operating system
         run: echo "OS is ${{runner.os}}"
+
+      - name: fail command
+        run: mkdipr day-40
         
