@@ -14,3 +14,30 @@ jobs:
 
       - name: deploying Message
         run: echo "Hello from Github Actions!" 
+
+      - name: date and timeout-minutes
+        run: date +"%Y-%m-%d %H:%M:%S"
+
+      - name: branch name
+        run: echo "branch is ${{ github.ref_name }}"
+
+  repo:
+    runs-on: ubuntu-latest
+    steps:
+      files:
+        - README.md
+        - .github/workflows
+        - hello.yaml
+
+  print_os:
+    runs-on: ubuntu-latest
+    steps:
+      - name: printing operating system
+        run: echo "OS is ${{runner.os}}"
+      
+
+      
+    - 
+
+      
+
