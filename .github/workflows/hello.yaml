@@ -24,20 +24,12 @@ jobs:
   repo:
     runs-on: ubuntu-latest
     steps:
-      files:
-        - README.md
-        - .github/workflows
-        - hello.yaml
+      - name: file in repo
+        run: ls -R
 
   OS:
     runs-on: ubuntu-latest
     steps:
       - name: printing operating system
         run: echo "OS is ${{runner.os}}"
-      
-
-      
-    - 
-
-      
-
+        
