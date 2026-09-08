@@ -1,0 +1,16 @@
+# This is my first pipeline for project 90 days of devops
+name: hello 
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: deploying Message
+        run: echo "Hello from Github Actions!" 
