@@ -34,5 +34,5 @@ jobs:
         run: echo "OS is ${{runner.os}}"
 
       - name: fail command
-        run: mkdipr day-40
+        run: mkdir day-40
         
