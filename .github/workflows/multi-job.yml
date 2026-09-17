@@ -1,12 +1,17 @@
 name: multiple jobs run
 
+env:
+    APP_NAME: myapp
+
 on: 
     push:
         branches: [main]
-
+        
 jobs:
     build:
         runs-on: ubuntu-latest
+        env:
+            ENVIRONMENT: staging
         steps: 
             - name: Print build
               run: echo "Building the app"
@@ -15,7 +20,9 @@ jobs:
         needs: [build]
         runs-on: ubuntu-latest
         steps:
-            - name: run tests
+            - env:
+                VERSION: 1.0.0
+              name: run test
               run: echo "Running tests"
 
     deploy:
@@ -23,4 +30,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: deploy app
-              run: echo "Deploying"
+              run: |
+                echo "Deploying"
+                echo "App Name: $APP_NAME"
+                echo "Environment: $ENVIRONMENT"
+                echo "Version: $VERSION"
