@@ -1,0 +1,22 @@
+name: current date
+
+on:
+    push: 
+        branches: [main]
+
+jobs:
+    current-date: 
+        runs-on: ubuntu-latest
+        outputs:
+            current_date: ${{ steps.set-date.outputs.date }}
+        steps:
+            - name: set date
+              id: set-date
+              run: echo "date=$(date)" >> $GITHUB_OUTPUT
+
+    read-output:
+        needs: [current-date]
+        runs-on: ubuntu-latest
+        steps:
+            - name: read output
+              run: echo "${{ needs.current-date.outputs.current_date }}"
