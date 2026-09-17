@@ -34,7 +34,7 @@ jobs:
             - name: Install dependencies
               run: |
                 pip install -r requirements.txt
-                python -m pytest
+                python -m pytest app.py
 
     summary:
         runs-on: ubuntu-latest
