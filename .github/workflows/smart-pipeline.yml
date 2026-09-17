@@ -46,4 +46,4 @@ jobs:
                 else
                   echo "This is a feature branch push! Running tests on branch: ${{ github.ref_name }}"
                 fi
-                echo "commit message: ${{ github.event.commits[0].message }}""
+                echo "commit message: ${{ github.event.commits[0].message }}"
