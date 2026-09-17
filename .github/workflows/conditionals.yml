@@ -20,3 +20,14 @@ jobs:
             - name: Run on failure
               if: failure()
               run: echo "This step is running because the previous step is failed"
+    
+    push-event:
+        runs-on: ubuntu-latest
+        if: github.event_name == 'push'
+        steps:
+            - name: Run code
+              run: echo "This only deploys or runs on an actual push!"
+
+            - name: continue
+              continue-on-error: true
+              run: install python3
