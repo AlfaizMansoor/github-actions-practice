@@ -35,3 +35,5 @@ jobs:
                 echo "App Name: $APP_NAME"
                 echo "Environment: $ENVIRONMENT"
                 echo "Version: $VERSION"
+                echo "Commit SHA  : ${{ github.sha }}"
+                echo "Triggered By: ${{ github.actor }}"
