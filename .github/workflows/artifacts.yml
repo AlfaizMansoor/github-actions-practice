@@ -1,0 +1,28 @@
+name: Download artifacts
+
+on:
+    workflow_dispatch:
+
+jobs:
+    file-generate:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: create file
+              run: |
+                echo "TEST REPORT" > report-practice.log
+                echo "Timestamp: $(date)" >> report-practice.log
+                echo "Status: SUCCESS" >> report-practice.log
+                echo "Passed: 14 tests" >> report-practice.log
+                echo "Failed: 0 tests" >> report-practice.log
+
+    download-artifact:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download artifact 
+              uses: actions/upload-artifact@v7
+              with: 
+                name: create file
+                
