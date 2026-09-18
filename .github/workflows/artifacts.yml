@@ -19,6 +19,7 @@ jobs:
                 echo "Failed: 0 tests" >> report-practice.log
 
     download-artifact:
+        needs: [file-generate]
         runs-on: ubuntu-latest
         steps:
             - name: Download artifact 
