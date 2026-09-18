@@ -18,6 +18,12 @@ jobs:
                 echo "Passed: 14 tests" >> report-practice.log
                 echo "Failed: 0 tests" >> report-practice.log
 
+            - name: Download artifact 
+              uses: actions/upload-artifact@v7
+              with: 
+                name: created file
+                path: report-practice.log
+
     download-artifact:
         needs: [file-generate]
         runs-on: ubuntu-latest
@@ -25,6 +31,6 @@ jobs:
             - name: Download artifact 
               uses: actions/upload-artifact@v7
               with: 
-                name: create file
-                path: report-practice.log
+                name: created file
+            - run: cat report-practice.log
                 
