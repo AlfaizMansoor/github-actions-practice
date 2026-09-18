@@ -25,4 +25,5 @@ jobs:
               uses: actions/upload-artifact@v7
               with: 
                 name: create file
+                path: report-practice.log
                 
