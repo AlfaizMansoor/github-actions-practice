@@ -12,7 +12,9 @@ jobs:
               uses: actions/checkout@v4
 
             - name: docker build
-              run: docker build -t my-app .
+              run: |
+                docker build -t my-app .
+                docker run -d -p 5000:5000 my-app app 
 
             - name: check running images
               run: docker ps
