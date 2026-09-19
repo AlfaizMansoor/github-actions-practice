@@ -14,7 +14,8 @@ jobs:
             - name: docker build
               run: |
                 docker build -t my-app .
-                docker run -d -p 5000:5000 --name my-app my-app 
+                docker run -d -p 5000:5000 --name my-app my-app
+                docker tag my-app my-app:latest
 
             - name: check running images
               run: docker ps
