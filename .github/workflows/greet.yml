@@ -1,0 +1,21 @@
+name: greetings
+
+on:
+    push:
+        branches: [main]
+jobs:
+  greet-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Greeting Action
+        uses: ./.github/actions/setup-and-greet
+        id: greet
+        with:
+          name: 'Alfaiz'
+          language: 'es'
+
+      - name: Check Output
+        run: echo "Greeted status:${{ steps.greet.outputs.greeted }}"

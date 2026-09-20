@@ -1,0 +1,37 @@
+name: 'Composite action'
+description: 'Greet someone in specified language'
+
+inputs:
+  name:
+    description: "Name of the person to greet"
+    required: true
+  language:
+    description: 'Language for greeting'
+    required: false
+    default: 'en'
+
+outputs:
+  greeted:
+    description: 'Whether greeting was printed'
+    value: ${{ steps.greet-step.outputs.greeted }}
+
+runs: 
+  using: 'composite'
+  steps: 
+    - name: Greeting script
+      id: greet
+      shell: bash
+      run: |
+        LANG="${{ inputs.language }}"
+        NAME="${{ inputs.name }}"
+        
+        if [ "$LANG" = "en" ]; then
+          echo "Hello, $NAME! Welcome to the workflow."
+        elif [ "$LANG" = "es" ]; then
+          echo "¡Hola, $NAME! Bienvenido al flujo de trabajo."
+        elif [ "$LANG" = "fr" ]; then
+          echo "Bonjour, $NAME! Bienvenue dans le workflow."
+        else
+          echo "Hello, $NAME! (Unsupported language '$LANG', defaulting to English)"
+
+        echo "greeted=true" >> "$GITHUB_OUTPUT"
