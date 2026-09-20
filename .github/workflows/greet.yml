@@ -15,7 +15,7 @@ jobs:
         id: greet
         with:
           name: 'Alfaiz'
-          language: 'es'
+          language: 'en'
 
       - name: Check Output
         run: echo "Greeted status:${{ steps.greet.outputs.greeted }}"
