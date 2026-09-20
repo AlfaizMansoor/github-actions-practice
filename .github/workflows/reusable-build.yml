@@ -13,11 +13,17 @@ on:
                 required: true
         secrets:
             docker_token: 
-                required: true
+                required: true 
+        outputs:
+            build_version:
+                value: ${{ jobs.building.outputs.version_output }}
 
 jobs: 
     Building:
         runs-on: ubuntu-latest
+        outputs:
+            version_output: ${{ steps.generate-version.outputs.version }}
+        
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -27,3 +33,8 @@ jobs:
 
             - name: Prints docker token
               run: echo "Docker token is set:true"
+
+            - name: Build version
+              id: generate-version
+              run: echo "VERSION_STRING="v1.0-${SHORT_SHA}"" >> "$GITHUB_OUTPUT"
+    
