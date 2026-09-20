@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Greeting Action
-        uses: ./.github/actions/setup-and-greet/action.yml
+        uses: ./.github/actions/setup-and-greet
         id: greet
         with:
           name: 'Alfaiz'
