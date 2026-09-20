@@ -36,5 +36,4 @@ jobs:
 
             - name: Build version
               id: generate-version
-              run: VERSION_STRING="v1.0-${SHORT_SHA}" > "$GITHUB_OUTPUT"
-    
+              run: VERSION_STRING="v1.0-${GITHUB_SHA::7}"
