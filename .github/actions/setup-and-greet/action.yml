@@ -13,7 +13,7 @@ inputs:
 outputs:
   greeted:
     description: 'Whether greeting was printed'
-    value: ${{ steps.greet.outputs.greeted }}
+    value: ${{steps.greet.outputs.greeted}}
 
 runs: 
   using: 'composite'
@@ -33,5 +33,6 @@ runs:
           echo "Bonjour, $NAME! Bienvenue dans le workflow."
         else
           echo "Hello, $NAME! (Unsupported language '$LANG', defaulting to English)"
-
+        fi
+        
         echo "greeted=true" >> "$GITHUB_OUTPUT"
