@@ -13,7 +13,7 @@ inputs:
 outputs:
   greeted:
     description: 'Whether greeting was printed'
-    value: ${{ steps.greet-step.outputs.greeted }}
+    value: ${{ steps.greet.outputs.greeted }}
 
 runs: 
   using: 'composite'
