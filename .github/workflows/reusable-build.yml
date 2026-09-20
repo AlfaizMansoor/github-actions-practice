@@ -9,7 +9,7 @@ on:
             environment: 
                 description: "Describe environment"
                 type: string
-                default: staging
+                default: "staging"
                 required: true
         secrets:
             docker_token: 
