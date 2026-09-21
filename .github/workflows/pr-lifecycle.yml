@@ -1,0 +1,28 @@
+name: Pull request
+
+on:
+    pull_request:
+        types:
+            [opened, synchronize, reopened, closed]
+
+jobs:
+    pr-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Print event type
+              run: echo "triggered event:${{ github.event.action }}"
+
+            - name: Print PR title
+              run: echo "PR event Title:${{ github.event.pull_request.title }}"
+
+            - name: Print PR Author
+              run: echo "PR Author:${{ github.event.pull_request.user.login }}"
+            
+            - name: Source Branch
+              run: echo "Source branch:${{ github.head_ref }}"
+
+            - name: Target Branch
+              run: echo "Target branch:${{ github.base_ref }}"
