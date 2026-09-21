@@ -6,10 +6,7 @@ on:
     paths:
       - 'src/**'
       - 'app/**'
-    paths-ignore:
-      - '*.md'
-      - 'docs/**'
-
+      
 jobs: 
     smart-triggers:
         runs-on: ubuntu-latest
