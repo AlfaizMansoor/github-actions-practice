@@ -2,11 +2,10 @@ name: smart triggers
 
 on:
   push:
-    branches: [main, release/*]
     paths:
       - 'src/**'
       - 'app/**'
-      
+
 jobs: 
     smart-triggers:
         runs-on: ubuntu-latest
