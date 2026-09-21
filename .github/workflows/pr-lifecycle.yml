@@ -26,3 +26,13 @@ jobs:
 
             - name: Target Branch
               run: echo "Target branch:${{ github.base_ref }}"
+            
+            - name: pr merged
+              if: github.event.pull_request.merged == true
+              run: |
+                PR_MERGED="${{github.event.pull_request.merged}}""
+                if [$PR_MERGED == 'true']; then
+                  echo "PR is Merged"
+                else
+                  echo "PR is not Merged"
+                fi
