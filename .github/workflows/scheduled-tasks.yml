@@ -1,0 +1,19 @@
+name: Schedule workflow
+
+on:
+    push: 
+        branches: [main]
+    schedule: 
+        - cron: '30 2 * * 1'
+        - cron: '0 */6 * * *'
+
+
+jobs:
+    scheduled:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Print Scheduled trigger
+              run: echo "Schedule Triggered:${{ github.event.schedule }}"
+
+            - name: Health check
+              run: curl --fail --silent --show-error --max-time 5 https://trainwithshubham.com
