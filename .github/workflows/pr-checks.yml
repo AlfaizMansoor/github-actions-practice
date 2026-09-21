@@ -1,0 +1,77 @@
+name: pr check
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    file-size-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: File size check
+              run: |
+                LIMIT=1048576 # 1 MB in bytes
+                FAILED=0
+
+                # Get all files Added (A) or Modified (M) in this pull request
+                for file in $(git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD); do
+            
+                # Skip evaluation if the file does not exist locally
+                  if [ ! -f "$file" ]; then continue; fi
+            
+                # Get size in bytes
+                  FILE_SIZE=$(wc -c < "$file")
+            
+                  if [ "$FILE_SIZE" -gt "$LIMIT" ]; then
+                    HUMAN_SIZE=$(du -sh "$file" | cut -f1)
+                    echo "ERROR: '$file' is $HUMAN_SIZE (Max allowed: 1 MB)"
+                    FAILED=1
+                  fi
+                done
+
+                if [ "$FAILED" -eq 1 ]; then
+                  exit 1
+                fi
+          
+                echo "All files are under 1 MB."
+
+    branch-name-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Branch namee
+              run: echo "Branch name is:${{ github.head_ref }}"
+
+            - name: Pattern
+              run: |
+                BRANCH="${{ github.head_ref }}"
+                echo "Checking source branch name: $BRANCH"
+          
+                # Match against permitted patterns
+                if [[ "$BRANCH" =~ ^(feature|fix|docs)/.+ ]]; then
+                  echo "Branch name follows naming conventions."
+                else
+                  echo "ERROR: Branch '$BRANCH' does not match patterns: feature/*, fix/*, or docs/*"
+                  exit 1
+                fi
+
+    pr-body-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Pull Request body
+              run: echo "PR Body:${{ github.event.pull_request.body }}"
+
+            - name: PR body
+              run: |
+                PR_BODY: ${{ github.event.pull_request.body }}
+                # Strip spaces, newlines, and carriage returns to ensure it's not just whitespace
+                CLEANED_BODY=$(echo "$PR_BODY" | tr -d '[:space:]')
+
+                if [ -z "$CLEANED_BODY" ]; then
+                  echo "::warning:: The PR description is empty! Please consider adding context for the reviewers."
+                else
+                  echo "PR description is present."
+                fi
+                
