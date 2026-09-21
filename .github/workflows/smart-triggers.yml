@@ -1,11 +1,16 @@
 name: smart triggers
 
+#on:
+# push:
+#   paths:
+#     - 'src/**'
+#     - 'app/**'
+
 on:
   push:
-    paths:
-      - 'src/**'
-      - 'app/**'
-
+    paths-ignore:
+            - '*.md'
+            - 'docs/**'
 jobs: 
     smart-triggers:
         runs-on: ubuntu-latest
