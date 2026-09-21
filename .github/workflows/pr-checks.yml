@@ -75,4 +75,4 @@ jobs:
                   echo "PR description is present."
                 fi
                 
-                echo "pr-check edit"
+                echo "pr-check edit v.0.1"
