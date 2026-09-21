@@ -1,0 +1,11 @@
+name: chain workflow
+
+on:
+    push:
+
+jobs:
+    run-test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: test only
+              run: ls 

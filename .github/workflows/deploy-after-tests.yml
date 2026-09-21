@@ -1,0 +1,21 @@
+name: run a workflow
+
+on:
+  workflow_run:
+    workflows: ["Run Tests"]
+    types: [completed]
+
+jobs: 
+    deploy:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: checks
+              run: |
+                if [${{ github.event.workflow_run.conclusion == 'success' }}]
+                  echo "Triggering workflow finished with status:${{ github.event.workflow_run.conclusion }}"
+                elif [${{ github.event.workflow_run.conclusion != 'success' }}]
+                  echo: "::warning:: Triggering workflow failed or was cancelled. Deployment aborted!"
+                  exit 1
+                else
+                  echo "Wrong approach"
+                fi
