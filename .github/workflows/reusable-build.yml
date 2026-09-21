@@ -1,0 +1,39 @@
+name: workflow reusable
+
+on:
+    workflow_call:
+        inputs:
+            app-name:
+                type: string
+                required: true
+            environment: 
+                description: "Describe environment"
+                type: string
+                default: "staging"
+                required: true
+        secrets:
+            docker_token: 
+                required: true 
+        outputs:
+            build_version:
+                value: ${{ jobs.building.outputs.version_output }}
+
+jobs: 
+    Building:
+        runs-on: ubuntu-latest
+        outputs:
+            version_output: ${{ steps.generate-version.outputs.version }}
+        
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: print app name
+              run: echo "Building ${{inputs.app-name}} for environment ${{inputs.environment}}"
+
+            - name: Prints docker token
+              run: echo "Docker token is set:true"
+
+            - name: Build version
+              id: generate-version
+              run: VERSION_STRING="v1.0-${{github.sha}}"
