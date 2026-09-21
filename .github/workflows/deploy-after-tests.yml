@@ -11,9 +11,9 @@ jobs:
         steps: 
             - name: checks
               run: |
-                if [${{ github.event.workflow_run.conclusion == 'success' }}]
+                if [${{ github.event.workflow_run.conclusion == 'success' }}]; then
                   echo "Triggering workflow finished with status:${{ github.event.workflow_run.conclusion }}"
-                elif [${{ github.event.workflow_run.conclusion != 'success' }}]
+                elif [${{ github.event.workflow_run.conclusion != 'success' }}];then
                   echo: "::warning:: Triggering workflow failed or was cancelled. Deployment aborted!"
                   exit 1
                 else
